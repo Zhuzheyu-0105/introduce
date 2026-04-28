@@ -1,0 +1,1968 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>O light - 无线磁吸自拍补光灯</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primary: #007AFF;
+      --color-primary-light: #2997FF;
+      --color-primary-dark: #0056CC;
+      --color-text: #1a1a1a;
+      --color-text-secondary: #666666;
+      --color-bg: #ffffff;
+      --color-bg-alt: #f8f9fa;
+      --color-bg-dark: #0f0f0f;
+      --color-white: #ffffff;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+    }
+
+    .navbar-back {
+      font-size: 14px;
+      color: var(--color-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.3s ease;
+    }
+
+    .navbar-back:hover {
+      opacity: 0.7;
+    }
+
+    .navbar-back svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .navbar-title {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .navbar-link {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-link:hover {
+      color: var(--color-text);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      background: url('Desktop - 1.png') 68% center / 95% auto no-repeat;
+      position: relative;
+    }
+
+    .hero::before {
+      display: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 80px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--color-primary);
+      font-weight: 500;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      max-width: 480px;
+    }
+
+    /* Section */
+    .section {
+      padding: 120px 48px;
+    }
+
+    .section-alt {
+      background: var(--color-bg-alt);
+    }
+
+    .section-dark {
+      background: var(--color-bg-dark);
+      color: var(--color-white);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-number {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--color-primary);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      font-size: 17px;
+      color: var(--color-text-secondary);
+      max-width: 700px;
+      margin: 24px auto 0;
+      line-height: 1.8;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .feature-card {
+      padding: 40px 32px;
+      background: var(--color-white);
+      border-radius: 24px;
+      text-align: right;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(107, 92, 231, 0.12);
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--color-text);
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* About / Product Background Section */
+    .section-bg {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 80px;
+      background: url('Desktop - 3.png') center center / cover no-repeat;
+      position: relative;
+    }
+
+    .section-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .section-bg .container {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .section-bg .section-header {
+      text-align: left;
+      margin-bottom: 0;
+    }
+
+    .section-bg .section-number {
+      color: var(--color-primary-light);
+    }
+
+    .section-bg .section-title {
+      color: var(--color-white);
+    }
+
+    .section-bg .section-desc {
+      color: rgba(255, 255, 255, 0.8);
+      margin: 24px 0 0;
+      max-width: none;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    /* Features Section with Background Image */
+    .features-bg {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0;
+      margin-top: 200px;
+    }
+
+    .features-bg img {
+      position: absolute;
+      left: 20%;
+      top: 0;
+      width: 80%;
+      height: 100%;
+      object-fit: contain;
+      object-position: right center;
+    }
+
+    .features-bg .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 0 80px;
+      max-width: none;
+    }
+
+    .features-bg .section-header {
+      margin-bottom: 48px;
+      text-align: left;
+    }
+
+    .features-bg .section-number {
+      color: var(--color-primary);
+    }
+
+    .features-bg .section-title {
+      color: var(--color-text);
+    }
+
+    .features-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .feature-card {
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all var(--transition-smooth);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-card:hover {
+      transform: translateX(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .feature-card.apple-card {
+      transition: transform 0.4s var(--ease-spring),
+                  box-shadow 0.4s var(--ease-apple),
+                  translate 0.3s var(--ease-spring);
+    }
+
+    .feature-card.apple-card:hover {
+      transform: translateX(10px) scale(1.02);
+      box-shadow: 0 16px 48px rgba(0, 122, 255, 0.15);
+    }
+
+    .feature-card-content {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 28px;
+      position: relative;
+    }
+
+    .feature-card-num {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 4px;
+      order: -1;
+      text-align: left;
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+      text-align: left;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    /* Specs */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 60px;
+    }
+
+    .spec-item {
+      text-align: center;
+      padding: 32px 24px;
+      background: var(--color-bg-alt);
+      border-radius: 20px;
+    }
+
+    .spec-value {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+    }
+
+    .spec-label {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+    }
+
+    /* Tech Section - New Layout */
+    .tech-bg {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+      overflow: hidden;
+      margin-top: 200px;
+    }
+
+    .tech-left {
+      width: 50%;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .tech-bg img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: auto;
+      max-width: none;
+    }
+
+    .tech-bg .container {
+      position: relative;
+      z-index: 1;
+      width: 50%;
+      min-width: 0;
+      height: 100vh;
+      padding: 120px 80px 120px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tech-bg .section-header {
+      margin-bottom: 48px;
+      text-align: left;
+    }
+
+    .tech-bg .section-number {
+      color: var(--color-primary);
+    }
+
+    .tech-bg .section-title {
+      color: var(--color-text);
+    }
+
+    .tech-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .tech-item {
+      width: 100%;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: all var(--transition-smooth);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .tech-item:hover {
+      transform: translateX(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .tech-item-content {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 28px;
+      position: relative;
+    }
+
+    .tech-item-num {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-primary);
+      line-height: 1;
+      margin-bottom: 4px;
+      order: -1;
+      text-align: left;
+    }
+
+    .tech-item h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+      text-align: left;
+    }
+
+    .tech-item p {
+      font-size: 15px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    /* Usage Section - New Layout */
+    .usage-bg {
+      position: relative;
+      min-height: 150vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin-top: 120px;
+    }
+
+    .usage-image {
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 0;
+    }
+
+    .usage-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .usage-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 220px;
+      background: linear-gradient(to top, rgba(255,255,255,0.95), transparent);
+      pointer-events: none;
+    }
+
+    .usage-header {
+      position: absolute;
+      top: 50vh;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      text-align: center;
+      padding: 0 48px;
+      max-width: 720px;
+      width: 100%;
+    }
+
+    .usage-header .section-number {
+      color: var(--color-primary);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+
+    .usage-header .section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+
+    .usage-header .section-desc {
+      font-size: 17px;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      margin-top: 16px;
+      max-width: 600px;
+    }
+
+    .usage-cards {
+      position: relative;
+      margin-top: auto;
+      left: auto;
+      right: auto;
+      bottom: auto;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      padding: 48px 48px 64px;
+      background: var(--color-bg);
+    }
+
+    .usage-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .usage-card {
+      background: var(--color-white);
+      border-radius: 24px;
+      padding: 0;
+      text-align: center;
+      transition: var(--transition-smooth);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .usage-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    }
+
+    .usage-card-image {
+      width: 100%;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-bg-alt);
+      padding: 20px;
+    }
+
+    .usage-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .usage-card-content {
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .usage-card-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+
+    .usage-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--color-text);
+    }
+
+    .usage-card p {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Award Section - New Layout */
+    .award-bg {
+      display: flex;
+      min-height: 100vh;
+      background: var(--color-bg-alt);
+    }
+
+    .award-left {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 60px;
+    }
+
+    .award-content {
+      max-width: 520px;
+      text-align: left;
+    }
+
+    .award-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .award-year {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      padding: 8px 16px;
+      background: var(--color-white);
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .award-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-primary);
+      padding: 8px 16px;
+      background: var(--color-primary);
+      color: white;
+      border-radius: 20px;
+    }
+
+    .award-title {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--color-text);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .award-subtitle {
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--color-primary);
+      margin-bottom: 32px;
+    }
+
+    .award-divider {
+      width: 60px;
+      height: 4px;
+      background: var(--color-primary);
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    .award-description {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      margin-bottom: 40px;
+    }
+
+    .award-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .award-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .award-feature-icon {
+      color: var(--color-primary);
+      font-size: 18px;
+    }
+
+    .award-right {
+      width: 50%;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    }
+
+    .award-image-wrapper {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .award-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Responsive for Award */
+    @media (max-width: 1024px) {
+      .award-bg {
+        flex-direction: column;
+      }
+
+      .award-left {
+        width: 100%;
+        padding: 80px 24px 40px;
+      }
+
+      .award-right {
+        width: 100%;
+        height: 50vh;
+      }
+    }
+
+    /* CTA Section */
+    .cta-section {
+      padding: 120px 48px;
+      background: var(--color-bg-alt);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 32px;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: var(--transition-smooth);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--color-primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(107, 92, 231, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--color-primary);
+      color: var(--color-primary);
+      margin-left: 16px;
+    }
+
+    .btn-outline:hover {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 40px 48px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tech-bg {
+        min-height: auto;
+        flex-direction: column;
+        margin-top: 120px;
+      }
+
+      .tech-left {
+        width: 100%;
+        height: 50vh;
+      }
+
+      .tech-bg img {
+        opacity: 0.3;
+      }
+
+      .tech-bg .container {
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        padding: 80px 20px;
+      }
+
+      .tech-item {
+        max-width: 100%;
+      }
+
+      .tech-item-content {
+        padding: 20px;
+      }
+
+      .tech-item-num {
+        font-size: 28px;
+      }
+
+      .specs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0 20px;
+      }
+
+      .navbar-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 100px 20px 60px;
+      }
+
+      .hero-content {
+        text-align: left;
+        margin: 0;
+      }
+
+      .hero p {
+        margin-left: 0;
+        margin-right: auto;
+      }
+
+      .section {
+        padding: 80px 20px;
+      }
+
+      .section-bg {
+        min-height: auto;
+        padding: 100px 20px;
+      }
+
+      .section-bg .container {
+        max-width: 100%;
+      }
+
+      .section-bg .section-desc {
+        font-size: 15px;
+      }
+
+      .features-bg {
+        height: auto;
+        min-height: auto;
+        padding: 80px 0;
+      }
+
+      .features-bg .container {
+        padding: 0 20px;
+      }
+
+      .features-bg .section-header {
+        margin-bottom: 32px;
+      }
+
+      .feature-card {
+        max-width: 100%;
+      }
+
+      .feature-card-num {
+        font-size: 36px;
+      }
+
+      .feature-card-content {
+        padding: 20px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .specs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .btn-outline {
+        margin-left: 0;
+        margin-top: 12px;
+      }
+
+      .usage-bg {
+        min-height: auto;
+        margin-top: 80px;
+      }
+
+      .usage-image {
+        height: 55vh;
+      }
+
+      .usage-header {
+        top: 27.5vh;
+        padding: 0 20px;
+      }
+
+      .usage-cards {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 32px 20px 48px;
+      }
+
+      .usage-header .section-title {
+        font-size: 24px;
+      }
+
+      .usage-header .section-desc {
+        font-size: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .usage-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========================
+       APPLE-STYLE ANIMATIONS
+       ======================== */
+    
+    /* Apple Animation Timing Functions */
+    :root {
+      --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+      --ease-apple-out: cubic-bezier(0, 0, 0.58, 1);
+      --ease-apple-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --duration-fast: 0.3s;
+      --duration-normal: 0.6s;
+      --duration-slow: 0.9s;
+    }
+
+    /* Hero Section - Apple Style Entrance */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      background: url('Desktop - 1.png') 68% center / 95% auto no-repeat;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      display: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .hero h1 {
+      font-size: clamp(48px, 8vw, 80px);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      opacity: 0;
+      transform: translateY(40px);
+      animation: heroTitleIn 1s var(--ease-apple-out) 0.2s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--color-primary);
+      font-weight: 500;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroSubtitleIn 0.8s var(--ease-apple-out) 0s forwards;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+      max-width: 480px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroTextIn 0.8s var(--ease-apple-out) 0.4s forwards;
+    }
+
+    /* Hero Animations */
+    @keyframes heroTitleIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroSubtitleIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroTextIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Apple Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.5s forwards;
+    }
+
+    .scroll-indicator span {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      letter-spacing: 0.1em;
+    }
+
+    .scroll-indicator-icon {
+      width: 24px;
+      height: 40px;
+      border: 2px solid var(--color-text-secondary);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-indicator-dot {
+      width: 4px;
+      height: 8px;
+      background: var(--color-primary);
+      border-radius: 2px;
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: scrollDot 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scrollDot {
+      0%, 100% {
+        top: 6px;
+        opacity: 1;
+      }
+      50% {
+        top: 20px;
+        opacity: 0.3;
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Apple-Style Scroll Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity var(--duration-slow) var(--ease-apple-out),
+                  transform var(--duration-slow) var(--ease-apple-out);
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Scale Animation on Scroll */
+    .animate-scale {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity var(--duration-slow) var(--ease-apple-out),
+                  transform var(--duration-slow) var(--ease-apple-out);
+    }
+
+    .animate-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Slide from Left */
+    .animate-slide-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity var(--duration-slow) var(--ease-apple-out),
+                  transform var(--duration-slow) var(--ease-apple-out);
+    }
+
+    .animate-slide-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Slide from Right */
+    .animate-slide-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity var(--duration-slow) var(--ease-apple-out),
+                  transform var(--duration-slow) var(--ease-apple-out);
+    }
+
+    .animate-slide-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Stagger Delays */
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+    .stagger-6 { transition-delay: 0.6s; }
+
+    /* Apple Card Hover Effects */
+    .apple-card {
+      transition: transform var(--duration-normal) var(--ease-spring),
+                  box-shadow var(--duration-normal) var(--ease-apple);
+    }
+
+    .apple-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0, 122, 255, 0.15);
+    }
+
+    /* Apple Button Effects */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 32px;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all var(--duration-fast) var(--ease-apple);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .btn:hover {
+      background: var(--color-primary-light);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 122, 255, 0.35);
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 122, 255, 0.25);
+    }
+
+    /* Parallax Container */
+    .parallax-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-bg {
+      position: absolute;
+      top: -20%;
+      left: 0;
+      width: 100%;
+      height: 140%;
+      will-change: transform;
+      transition: transform 0.1s linear;
+    }
+
+    /* Apple Feature Reveal */
+    .reveal-mask {
+      overflow: hidden;
+    }
+
+    .reveal-content {
+      transform: translateY(100%);
+      transition: transform 0.8s var(--ease-apple-out);
+    }
+
+    .reveal-mask.visible .reveal-content {
+      transform: translateY(0);
+    }
+
+    /* Image Zoom on Scroll */
+    .zoom-on-scroll {
+      transform: scale(1.1);
+      transition: transform 1.2s var(--ease-apple-out);
+    }
+
+    .zoom-on-scroll.visible {
+      transform: scale(1);
+    }
+
+    /* Text Gradient Animation */
+    .gradient-text {
+      background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light), var(--color-primary));
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Floating Animation */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Pulse Glow Effect */
+    .pulse-glow {
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { 
+        box-shadow: 0 0 20px rgba(0, 122, 255, 0.3);
+      }
+      50% { 
+        box-shadow: 0 0 40px rgba(0, 122, 255, 0.6);
+      }
+    }
+
+    /* Line Draw Animation */
+    .line-draw {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: drawLine 2s var(--ease-apple-out) forwards;
+    }
+
+    @keyframes drawLine {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    /* Counter Animation */
+    .counter {
+      display: inline-block;
+    }
+
+    /* Loading Skeleton */
+    .skeleton {
+      background: linear-gradient(90deg, 
+        var(--color-bg-alt) 25%, 
+        var(--color-white) 50%, 
+        var(--color-bg-alt) 75%
+      );
+      background-size: 200% 100%;
+      animation: skeleton 1.5s ease infinite;
+    }
+
+    @keyframes skeleton {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Hero Background Parallax */
+    .hero-bg-parallax {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 70%;
+      height: 100%;
+      will-change: transform;
+      background: url('Desktop - 1.png') center center / 95% auto no-repeat;
+      transition: transform 0.05s linear;
+    }
+
+    /* Section Reveal with Clip Path */
+    .clip-reveal {
+      clip-path: inset(100% 0 0 0);
+      transition: clip-path 0.8s var(--ease-apple-out);
+    }
+
+    .clip-reveal.visible {
+      clip-path: inset(0 0 0 0);
+    }
+
+    /* Blur Reveal */
+    .blur-reveal {
+      filter: blur(10px);
+      opacity: 0;
+      transition: filter 0.8s var(--ease-apple-out),
+                  opacity 0.8s var(--ease-apple-out);
+    }
+
+    .blur-reveal.visible {
+      filter: blur(0);
+      opacity: 1;
+    }
+
+    /* Magnetic Button Effect */
+    .magnetic-btn {
+      transition: transform 0.3s var(--ease-spring);
+    }
+
+    /* Section Title Animation */
+    .section-title-animate {
+      overflow: hidden;
+    }
+
+    .section-title-animate span {
+      display: inline-block;
+      transform: translateY(100%);
+      transition: transform 0.6s var(--ease-spring);
+    }
+
+    .section-title-animate.visible span {
+      transform: translateY(0);
+    }
+
+    /* Image Reveal Animation */
+    .image-reveal {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-reveal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--color-white);
+      transform-origin: left;
+      transition: transform 0.8s var(--ease-apple-out);
+      z-index: 2;
+    }
+
+    .image-reveal.visible::before {
+      transform: scaleX(0);
+    }
+
+    .image-reveal img {
+      transform: scale(1.2);
+      transition: transform 1.2s var(--ease-apple-out);
+    }
+
+    .image-reveal.visible img {
+      transform: scale(1);
+    }
+
+    /* Fade Up Scale */
+    .fade-up-scale {
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      transition: opacity 0.8s var(--ease-apple-out),
+                  transform 0.8s var(--ease-apple-out);
+    }
+
+    .fade-up-scale.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Letter Animation */
+    .letter-wrap {
+      overflow: hidden;
+    }
+
+    .letter {
+      display: inline-block;
+      transform: translateY(100%);
+      transition: transform 0.5s var(--ease-spring);
+    }
+
+    .letter-wrap.visible .letter {
+      transform: translateY(0);
+    }
+
+    /* ========================
+       END APPLE ANIMATIONS
+       ======================== */
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar-back">
+      <svg viewBox="0 0 16 16" fill="currentColor">
+        <path d="M11.41 3.59L12.83 5l-6 6-6-6 1.42-1.41L6.83 8l4.58-4.41z"/>
+      </svg>
+      返回
+    </a>
+    <span class="navbar-title">O light</span>
+    <div class="navbar-links">
+      <a href="#about" class="navbar-link">产品介绍</a>
+      <a href="#features" class="navbar-link">核心功能</a>
+      <a href="#tech" class="navbar-link">技术亮点</a>
+      <a href="#usage" class="navbar-link">使用方式</a>
+      <a href="#award" class="navbar-link">奖项荣誉</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg-parallax"></div>
+    <div class="hero-content">
+      <p class="hero-subtitle">Wireless Magnetic Selfie Light</p>
+      <h1>O light</h1>
+      <p>磁吸夹扣式自拍补光灯，集成无线充电、多角度调节与可定制色彩三大功能，为自拍、直播和便携照明提供专业解决方案。</p>
+    </div>
+    <div class="scroll-indicator">
+      <span>SCROLL</span>
+      <div class="scroll-indicator-icon">
+        <div class="scroll-indicator-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section-bg">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <p class="section-number">01</p>
+        <h2 class="section-title">产品背景</h2>
+        <p class="section-desc">随着短视频、直播和社交媒体的兴起，用户对高质量手机成像的需求显著增长。传统补光方案存在体积笨重、亮度不足、发热严重等问题，限制了其便携性和有效性。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features-bg">
+    <img src="Desktop - 4.png" alt="" class="parallax-bg">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <p class="section-number">02</p>
+        <h2 class="section-title">核心功能</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card apple-card animate-on-scroll stagger-1">
+          <div class="feature-card-content">
+            <span class="feature-card-num">1</span>
+            <h3>磁吸设计</h3>
+            <p>一贴即合，自动触发 NFC 和蓝牙配对</p>
+          </div>
+        </div>
+        <div class="feature-card apple-card animate-on-scroll stagger-2">
+          <div class="feature-card-content">
+            <span class="feature-card-num">2</span>
+            <h3>无线充电</h3>
+            <p>整合无线充电模块，利用手机电源供电</p>
+          </div>
+        </div>
+        <div class="feature-card apple-card animate-on-scroll stagger-3">
+          <div class="feature-card-content">
+            <span class="feature-card-num">3</span>
+            <h3>多角度调节</h3>
+            <p>120° 前后倾斜，360° 旋转</p>
+          </div>
+        </div>
+        <div class="feature-card apple-card animate-on-scroll stagger-4">
+          <div class="feature-card-content">
+            <span class="feature-card-num">4</span>
+            <h3>色彩定制</h3>
+            <p>通过 App 自定义每颗灯珠的颜色和亮度</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Section -->
+  <section id="tech" class="tech-bg">
+    <div class="tech-left image-reveal">
+      <img src="Desktop - 88.png" alt="" class="zoom-on-scroll">
+    </div>
+    <div class="container">
+      <div class="section-header animate-slide-left">
+        <p class="section-number">03</p>
+        <h2 class="section-title">技术亮点</h2>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item apple-card animate-on-scroll stagger-1">
+          <div class="tech-item-content">
+            <span class="tech-item-num">1</span>
+            <h3>无线充电系统</h3>
+            <p>设计在底部整合无线充电模块，电池位于上部。接触针机制实现闭合时高效充电。借助手机电源供电，O light 保持满电状态，确保稳定运行。</p>
+          </div>
+        </div>
+        <div class="tech-item apple-card animate-on-scroll stagger-2">
+          <div class="tech-item-content">
+            <span class="tech-item-num">2</span>
+            <h3>EFI 照明技术</h3>
+            <p>新型照明技术，相比传统 LED 更节能、更明亮、发热更少。O light 采用此技术减少电池依赖、最小化发热、缩小整体尺寸。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usage Section -->
+  <section id="usage" class="usage-bg">
+    <div class="usage-image parallax-container">
+      <img src="Desktop - 6.png" alt="" class="parallax-bg zoom-on-scroll">
+    </div>
+    <div class="usage-header animate-fade-up">
+      <p class="section-number">04</p>
+      <h2 class="section-title">使用方式</h2>
+      <p class="section-desc">两种模式灵活切换，满足不同场景的补光需求</p>
+    </div>
+    <div class="usage-cards">
+      <div class="usage-card apple-card animate-on-scroll stagger-1">
+        <div class="usage-card-image">
+          <img src="折叠 1.png" alt="">
+        </div>
+        <div class="usage-card-content">
+          <div class="usage-card-value">120°</div>
+          <h3>折叠</h3>
+        </div>
+      </div>
+      <div class="usage-card apple-card animate-on-scroll stagger-2">
+        <div class="usage-card-image">
+          <img src="8 1.png" alt="">
+        </div>
+        <div class="usage-card-content">
+          <div class="usage-card-value">360°</div>
+          <h3>旋转</h3>
+        </div>
+      </div>
+      <div class="usage-card apple-card animate-on-scroll stagger-3">
+        <div class="usage-card-image">
+          <img src="7 1.png" alt="">
+        </div>
+        <div class="usage-card-content">
+          <div class="usage-card-value">±3mm</div>
+          <h3>前后移动</h3>
+        </div>
+      </div>
+      <div class="usage-card apple-card animate-on-scroll stagger-4">
+        <div class="usage-card-image">
+          <img src="Group 18.png" alt="">
+        </div>
+        <div class="usage-card-content">
+          <div class="usage-card-value">360°</div>
+          <h3>旋转</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Award Section -->
+  <section id="award" class="award-bg">
+    <div class="award-left">
+      <div class="award-content animate-slide-right">
+        <div class="award-badge">
+          <span class="award-year">2025</span>
+          <span class="award-name">IDA</span>
+        </div>
+        <h2 class="award-title">IDA Silver Award</h2>
+        <p class="award-subtitle">银奖</p>
+        <div class="award-divider line-draw"></div>
+        <p class="award-description">
+          O light 凭借创新的磁吸设计与无线充电集成方案，荣获国际设计奖（IDA）银奖。评审团高度认可其在便携性与功能性之间的完美平衡。
+        </p>
+        <div class="award-features">
+          <div class="award-feature animate-on-scroll stagger-1">
+            <span class="award-feature-icon">◎</span>
+            <span>创新磁吸结构</span>
+          </div>
+          <div class="award-feature animate-on-scroll stagger-2">
+            <span class="award-feature-icon">◎</span>
+            <span>EFI 智能照明</span>
+          </div>
+          <div class="award-feature animate-on-scroll stagger-3">
+            <span class="award-feature-icon">◎</span>
+            <span>多场景适配</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="award-right image-reveal">
+      <div class="award-image-wrapper">
+        <img src="Desktop - 1.png" alt="O light Product" class="award-image zoom-on-scroll">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section animate-on-scroll">
+    <h2>了解更多作品</h2>
+    <a href="../index.html" class="btn magnetic-btn">返回作品集</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 O light. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // ============================================
+    // APPLE-STYLE ANIMATION SYSTEM
+    // ============================================
+    
+    // Intersection Observer for scroll animations with enhanced options
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -80px 0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animated elements
+    const animatedElements = document.querySelectorAll(
+      '.animate-on-scroll, .animate-scale, .animate-slide-left, .animate-slide-right, ' +
+      '.fade-up-scale, .blur-reveal, .image-reveal, .clip-reveal'
+    );
+    
+    animatedElements.forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // ============================================
+    // PARALLAX SCROLL EFFECTS
+    // ============================================
+    
+    const parallaxElements = document.querySelectorAll('.parallax-bg, .hero-bg-parallax');
+    
+    function updateParallax() {
+      const scrollY = window.pageYOffset;
+      
+      parallaxElements.forEach(el => {
+        const rect = el.parentElement.getBoundingClientRect();
+        const elementTop = rect.top + scrollY;
+        const elementHeight = rect.height;
+        const viewportHeight = window.innerHeight;
+        
+        // Check if element is in viewport
+        if (scrollY + viewportHeight > elementTop && scrollY < elementTop + elementHeight) {
+          const progress = (scrollY + viewportHeight - elementTop) / (viewportHeight + elementHeight);
+          const parallaxOffset = (progress - 0.5) * 100;
+          
+          el.style.transform = `translateY(${parallaxOffset * 0.3}px)`;
+        }
+      });
+    }
+
+    // Throttled scroll handler for parallax
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateParallax();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // ============================================
+    // HOVER EFFECTS
+    // ============================================
+    
+    // Magnetic button effect for cards
+    const magneticCards = document.querySelectorAll('.feature-card, .tech-item, .usage-card');
+    
+    magneticCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const moveX = (x - centerX) / 20;
+        const moveY = (y - centerY) / 20;
+        
+        card.style.transform = `translateY(-8px) translateX(${moveX}px)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    // ============================================
+    // NAVBAR SCROLL BEHAVIOR
+    // ============================================
+    
+    const navbar = document.querySelector('.navbar');
+    let lastScrollY = 0;
+    
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.pageYOffset;
+      
+      // Add shadow on scroll
+      if (currentScrollY > 50) {
+        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+      } else {
+        navbar.style.boxShadow = 'none';
+      }
+      
+      lastScrollY = currentScrollY;
+    });
+
+    // ============================================
+    // IMAGE LAZY LOADING WITH FADE
+    // ============================================
+    
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.addEventListener('load', () => {
+            img.classList.add('loaded');
+          });
+          imageObserver.unobserve(img);
+        }
+      });
+    });
+
+    lazyImages.forEach(img => {
+      imageObserver.observe(img);
+    });
+
+    // ============================================
+    // LETTER ANIMATION FOR TITLES
+    // ============================================
+    
+    const letterTitles = document.querySelectorAll('.section-title');
+    
+    letterTitles.forEach(title => {
+      const text = title.textContent;
+      title.innerHTML = '';
+      title.classList.add('section-title-animate');
+      
+      text.split('').forEach((char, i) => {
+        const span = document.createElement('span');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.style.transitionDelay = `${i * 0.03}s`;
+        title.appendChild(span);
+      });
+    });
+
+    // Observe section titles for animation
+    const titleObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    letterTitles.forEach(title => {
+      titleObserver.observe(title);
+    });
+
+    // ============================================
+    // CURSOR FOLLOWER (Optional)
+    // ============================================
+    
+    // Create cursor follower element
+    const cursorFollower = document.createElement('div');
+    cursorFollower.className = 'cursor-follower';
+    cursorFollower.style.cssText = `
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--color-primary);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.1s ease;
+      mix-blend-mode: difference;
+    `;
+    document.body.appendChild(cursorFollower);
+
+    let cursorVisible = false;
+    
+    document.addEventListener('mouseenter', () => {
+      cursorFollower.style.opacity = '1';
+      cursorVisible = true;
+    });
+    
+    document.addEventListener('mouseleave', () => {
+      cursorFollower.style.opacity = '0';
+      cursorVisible = false;
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+      cursorFollower.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`;
+    });
+
+    // ============================================
+    // SMOOTH REVEAL ON PAGE LOAD
+    // ============================================
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease';
+      
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+
+    // Initial parallax update
+    updateParallax();
+  </script>
+</body>
+</html>

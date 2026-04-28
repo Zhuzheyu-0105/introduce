@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YAO - Children's Oral Lip Muscle Trainer | 朱哲宇</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --color-bg: #FFFFFF;
+      --color-bg-alt: #F5F5F7;
+      --color-bg-dark: #1D1D1F;
+      --color-text: #1D1D1F;
+      --color-text-secondary: #86868B;
+      --color-accent: #007AFF;
+      --color-accent-dark: #2997FF;
+      --font-display: -apple-system, "SF Pro Display", "Helvetica Neue", "PingFang SC", sans-serif;
+      --font-body: -apple-system, "SF Pro Text", "Helvetica Neue", "PingFang SC", sans-serif;
+      --transition-base: 0.3s ease;
+      --transition-smooth: 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+    }
+
+    .navbar-back {
+      font-size: 14px;
+      color: var(--color-accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity var(--transition-base);
+    }
+
+    .navbar-back:hover {
+      opacity: 0.7;
+    }
+
+    .navbar-title {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .navbar-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .navbar-link {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color var(--transition-base);
+    }
+
+    .navbar-link:hover {
+      color: var(--color-text);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      background: var(--color-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1400px;
+      z-index: 0;
+      opacity: 0.9;
+    }
+
+    .hero-bg img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      margin-top: 15vh;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(64px, 12vw, 120px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .hero-content .yao-y,
+    .hero-content .yao-a {
+      color: #4F46BA;
+    }
+
+    .hero-content .yao-o {
+      color: #F9896B;
+    }
+
+    .hero-content .subtitle {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--color-text);
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease 0.2s forwards;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-bg {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 1400px;
+      z-index: 0;
+      opacity: 1;
+      filter: brightness(1.15) contrast(0.95);
+    }
+
+    .hero-image {
+      width: 100%;
+      max-width: 1200px;
+      opacity: 0;
+      transform: translateY(60px) scale(1.05);
+      animation: fadeInUp 1s ease 0.4s forwards;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.1);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Section */
+    .section {
+      padding: 120px 24px;
+    }
+
+    .section-dark {
+      background: var(--color-bg-dark);
+      color: var(--color-bg);
+    }
+
+    .section-alt {
+      background: var(--color-bg-alt);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .section-number {
+      font-size: 14px;
+      color: var(--color-accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .section-dark .section-number {
+      color: var(--color-accent-dark);
+    }
+
+    .section-title {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Introduction Section */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .intro-image {
+      border-radius: 24px;
+    }
+
+    .intro-image img {
+      width: 100%;
+      height: auto;
+      transition: transform var(--transition-smooth);
+    }
+
+    .intro-image:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Intro Product Carousel */
+    .intro-product-carousel-wrapper {
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .intro-product-carousel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-product-carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .intro-product-carousel-slide {
+      min-width: 100%;
+    }
+
+    .intro-product-carousel-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: translateY(-50%) scale(1.08);
+    }
+
+    .carousel-btn-prev {
+      left: 12px;
+    }
+
+    .carousel-btn-next {
+      right: 12px;
+    }
+
+    .carousel-btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: #1D1D1F;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .intro-content h3 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .intro-content p {
+      font-size: 17px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .section-dark .intro-content p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Stats Section */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      margin-top: 64px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 40px 24px;
+      background: var(--color-bg);
+      border-radius: 24px;
+      transition: all var(--transition-smooth);
+    }
+
+    .section-dark .stat-card {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--color-accent);
+      line-height: 1.0;
+      margin-bottom: 12px;
+    }
+
+    .section-dark .stat-number {
+      color: var(--color-accent-dark);
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+    }
+
+    .section-dark .stat-label {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .feature-card {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 32px 24px 40px;
+      border-radius: 24px;
+      background: var(--color-bg);
+      transition: all var(--transition-smooth);
+    }
+
+    .section-dark .feature-card {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature-card-image {
+      width: 100%;
+      height: 220px;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      flex-shrink: 0;
+    }
+
+    .feature-card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .feature-card-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .feature-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon svg {
+      width: 32px;
+      height: 32px;
+      fill: white;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .section-dark .feature-card p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Tech Section */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .tech-main-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .tech-left {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .tech-right {
+      position: relative;
+    }
+
+    .tech-right img {
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+    }
+
+    .tech-diagram-section {
+      margin-top: 32px;
+    }
+
+    .tech-diagram-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .section-dark .tech-diagram-title {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .tech-diagram-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .tech-diagram-item {
+      text-align: center;
+    }
+
+    .tech-diagram-item img {
+      width: 100%;
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+
+    .tech-diagram-item p {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      padding: 0 16px;
+    }
+
+    .tech-image {
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .tech-image img {
+      width: 100%;
+      height: auto;
+      transition: transform var(--transition-smooth);
+    }
+
+    .tech-image:hover img {
+      transform: scale(1.05);
+    }
+
+    .tech-content h3 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .tech-content p {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .section-dark .tech-content p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Mechanism Steps */
+    .mechanism-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .mechanism-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      background: rgba(0, 122, 255, 0.1);
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    .section-dark .mechanism-step {
+      background: rgba(41, 151, 255, 0.2);
+    }
+
+    .mechanism-step span {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .section-dark .mechanism-step span {
+      color: var(--color-accent-dark);
+    }
+
+    /* App Showcase Layout */
+    .app-showcase-layout {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .app-showcase-left h3 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .app-showcase-left p {
+      font-size: 17px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .app-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .app-feature {
+      padding: 20px;
+      background: var(--color-bg);
+      border-radius: 16px;
+      text-align: center;
+      transition: all var(--transition-base);
+    }
+
+    .app-feature:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(79, 70, 186, 0.15);
+    }
+
+    .app-feature h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #4F46BA;
+    }
+
+    .app-feature p {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+
+    .app-showcase-right {
+      position: relative;
+      height: 500px;
+    }
+
+    .app-phone-stack {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .app-phone {
+      position: absolute;
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    .app-phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .app-phone-1 {
+      width: 200px;
+      height: 400px;
+      top: 10%;
+      left: 0;
+      transform: rotate(-12deg);
+      z-index: 1;
+    }
+
+    .app-phone-2 {
+      width: 200px;
+      height: 400px;
+      top: 0;
+      left: 20%;
+      transform: rotate(-4deg);
+      z-index: 2;
+    }
+
+    .app-phone-3 {
+      width: 220px;
+      height: 440px;
+      top: 5%;
+      left: 35%;
+      transform: rotate(6deg);
+      z-index: 3;
+    }
+
+    .app-phone-4 {
+      width: 200px;
+      height: 400px;
+      top: 15%;
+      right: 10%;
+      transform: rotate(10deg);
+      z-index: 2;
+    }
+
+    .app-phone-5 {
+      width: 180px;
+      height: 360px;
+      top: 30%;
+      right: 0;
+      transform: rotate(16deg);
+      z-index: 1;
+    }
+
+    .app-phone:hover {
+      transform: scale(1.05) rotate(0deg) !important;
+      z-index: 10;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .gallery-item {
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item:first-child {
+      grid-column: span 2;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform var(--transition-smooth);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Award Section */
+    .award-section {
+      text-align: center;
+      padding: 120px 24px;
+    }
+
+    .award-logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 48px;
+    }
+
+    .award-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .award-section h2 {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 600;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .award-section p {
+      font-size: 17px;
+      color: var(--color-text-secondary);
+    }
+
+    /* Red Dot Award Section - New Layout */
+    .reddot-bg {
+      display: flex;
+      min-height: 100vh;
+      background: var(--color-bg-alt);
+    }
+
+    .reddot-left {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 60px;
+    }
+
+    .reddot-content {
+      max-width: 520px;
+      text-align: left;
+    }
+
+    .reddot-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .reddot-year {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      padding: 8px 16px;
+      background: var(--color-bg);
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .reddot-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #E83A3A;
+      padding: 8px 16px;
+      background: #E83A3A;
+      color: white;
+      border-radius: 20px;
+    }
+
+    .reddot-title {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--color-text);
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .reddot-subtitle {
+      font-size: 24px;
+      font-weight: 500;
+      color: #E83A3A;
+      margin-bottom: 32px;
+    }
+
+    .reddot-divider {
+      width: 60px;
+      height: 4px;
+      background: #E83A3A;
+      border-radius: 2px;
+      margin-bottom: 32px;
+    }
+
+    .reddot-description {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      margin-bottom: 40px;
+    }
+
+    .reddot-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .reddot-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .reddot-feature-icon {
+      color: #E83A3A;
+      font-size: 18px;
+    }
+
+    .reddot-right {
+      width: 50%;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #E83A3A, #FF6B6B);
+    }
+
+    .reddot-image-wrapper {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .reddot-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    @media (max-width: 1024px) {
+      .reddot-bg {
+        flex-direction: column;
+      }
+
+      .reddot-left {
+        width: 100%;
+        padding: 80px 24px 40px;
+      }
+
+      .reddot-right {
+        width: 100%;
+        height: 50vh;
+      }
+    }
+
+    /* Usage Section */
+    .usage-section {
+      position: relative;
+      overflow: hidden;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+    }
+
+    .usage-section-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .usage-section-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(1.1) contrast(0.95);
+    }
+
+    .usage-section .container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+
+    .usage-steps-right {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 400px;
+      margin-left: auto;
+      padding: 40px 0;
+    }
+
+    .usage-step-img {
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      transition: all var(--transition-base);
+    }
+
+    .usage-step-img:hover {
+      transform: translateX(12px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .usage-step-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 120px 24px;
+      background: var(--color-bg-alt);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 600;
+      margin-bottom: 32px;
+      letter-spacing: -0.02em;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      background: var(--color-accent);
+      color: white;
+      border-radius: 24px;
+      font-size: 17px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .btn:hover {
+      background: #0071E3;
+      transform: scale(1.02);
+    }
+
+    /* Scroll Animations */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .animate-on-scroll.stagger-1 { transition-delay: 0.1s; }
+    .animate-on-scroll.stagger-2 { transition-delay: 0.2s; }
+    .animate-on-scroll.stagger-3 { transition-delay: 0.3s; }
+    .animate-on-scroll.stagger-4 { transition-delay: 0.4s; }
+
+    /* Background Full with Text Right */
+    .background-full {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background-full-image {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .background-full-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(1.1) contrast(0.95);
+    }
+
+    .background-full .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .background-full .intro-grid {
+      justify-content: flex-end;
+    }
+
+    .background-full .intro-content {
+      max-width: 50%;
+      text-align: right;
+    }
+
+    .background-full .intro-content h3 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .background-full .intro-content p {
+      font-size: 17px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1023px) {
+      .navbar {
+        padding: 0 24px;
+      }
+
+      .navbar-links {
+        display: none;
+      }
+
+      .intro-grid,
+      .tech-grid,
+      .app-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section {
+        padding: 80px 24px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .navbar {
+        height: 56px;
+      }
+
+      .hero {
+        padding: 100px 20px 60px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item:first-child {
+        grid-column: span 1;
+      }
+
+      .app-features {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+
+      .section-header {
+        margin-bottom: 48px;
+      }
+
+      .mechanism-steps {
+        flex-direction: column;
+      }
+
+      .app-showcase-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .app-showcase-right {
+        height: 350px;
+      }
+
+      .app-phone-1,
+      .app-phone-2,
+      .app-phone-3,
+      .app-phone-4,
+      .app-phone-5 {
+        width: 140px;
+        height: 280px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="../index.html" class="navbar-back">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M11.41 3.59L12.83 5l-6 6-6-6 1.42-1.41L6.83 8l4.58-4.41z"/>
+      </svg>
+      返回
+    </a>
+    <span class="navbar-title">YAO</span>
+    <div class="navbar-links">
+      <a href="#intro" class="navbar-link">介绍</a>
+      <a href="#features" class="navbar-link">功能</a>
+      <a href="#tech" class="navbar-link">技术</a>
+      <a href="#app" class="navbar-link">App</a>
+      <a href="#award" class="navbar-link">展示</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1><span class="yao-y">Y</span><span class="yao-a">A</span><span class="yao-o">O</span></h1>
+      <p class="subtitle">Children's Oral Lip Muscle Trainer</p>
+    </div>
+    <div class="hero-bg">
+      <img src="Desktop - 2.png" alt="YAO 儿童口腔唇肌训练器">
+    </div>
+  </section>
+
+  <!-- Introduction Section -->
+  <section id="intro" class="section animate-on-scroll">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-number">01</p>
+        <h2 class="section-title">产品介绍</h2>
+      </div>
+      <div class="intro-grid">
+        <div class="intro-content animate-on-scroll stagger-1">
+          <h3>专为1-3岁儿童设计</h3>
+          <p>YAO 是一款专为儿童口腔唇肌无力设计的康复训练设备。通过创新的气囊调节系统和实时传感器追踪，帮助儿童训练唇肌力量与协调性。</p>
+          <p>产品由主体和可更换的训练头组成，每个训练头配有气囊系统调节咬合力，传感器实时追踪咬合力量和发育进度。音乐提示激励儿童主动参与训练。</p>
+          <p>家长和医生可通过配套App获取咬合数据，监测口腔肌肉发育并指导健康管理。</p>
+        </div>
+        <div class="intro-image animate-on-scroll stagger-2">
+          <div class="intro-product-carousel-wrapper">
+            <div class="intro-product-carousel" id="introCarousel">
+              <div class="intro-product-carousel-track">
+                <div class="intro-product-carousel-slide">
+                  <img src="图片/3.png" alt="产品图1">
+                </div>
+                <div class="intro-product-carousel-slide">
+                  <img src="图片/4.png" alt="产品图2">
+                </div>
+                <div class="intro-product-carousel-slide">
+                  <img src="图片/5.png" alt="产品图3">
+                </div>
+                <div class="intro-product-carousel-slide">
+                  <img src="图片/6.png" alt="产品图4">
+                </div>
+                <div class="intro-product-carousel-slide">
+                  <img src="图片/7.png" alt="产品图5">
+                </div>
+                <div class="intro-product-carousel-slide">
+                  <img src="图片/8.png" alt="产品图6">
+                </div>
+                <div class="intro-product-carousel-slide">
+                  <img src="图片/9.png" alt="产品图7">
+                </div>
+              </div>
+              <button class="carousel-btn carousel-btn-prev" id="carouselPrev">
+                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button class="carousel-btn carousel-btn-next" id="carouselNext">
+                <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card animate-on-scroll stagger-1">
+          <div class="stat-number">30-40%</div>
+          <div class="stat-label">孤独症儿童存在<br>显著语言障碍</div>
+        </div>
+        <div class="stat-card animate-on-scroll stagger-2">
+          <div class="stat-number">7-10%</div>
+          <div class="stat-label">儿童存在<br>语言发育迟缓</div>
+        </div>
+        <div class="stat-card animate-on-scroll stagger-3">
+          <div class="stat-number">1-3岁</div>
+          <div class="stat-label">目标用户<br>年龄段</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Background Section -->
+  <section class="section section-alt background-full animate-on-scroll">
+    <div class="background-full-image">
+      <img src="wells806918_Realistic_depiction_of_a_baby_with_features_reflect_b 1.png" alt="儿童">
+    </div>
+    <div class="container">
+      <div class="tech-main-layout">
+        <div class="tech-left">
+          <div class="tech-content animate-on-scroll stagger-1">
+            <h3>关注儿童语言发展</h3>
+            <p>随着孤独症等神经发育障碍的增多，儿童常伴有言语发育迟缓和语言发展问题，唇肌无力是其中一个重要因素。</p>
+            <p>现代流质饮食限制了自然的口腔肌肉训练，导致幼儿唇肌力量不足。这不仅影响言语发展，还可能导致相关的心理问题。</p>
+          </div>
+          <div class="mechanism-steps animate-on-scroll stagger-2">
+            <div class="mechanism-step"><span>01</span> 神经发育障碍增多</div>
+            <div class="mechanism-step"><span>02</span> 唇肌无力影响言语</div>
+            <div class="mechanism-step"><span>03</span> 流质饮食限制训练</div>
+          </div>
+        </div>
+        <div class="tech-right animate-on-scroll stagger-2">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section animate-on-scroll">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-number">03</p>
+        <h2 class="section-title">核心功能</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card animate-on-scroll stagger-1">
+          <div class="feature-card-image">
+            <img src="图片/7.png" alt="UV杀菌">
+          </div>
+          <div class="feature-card-body">
+            <h3>UV杀菌消毒</h3>
+            <p>放入收纳盒自动激活UV杀菌和充电，透明组件实时监控消毒过程，确保卫生便捷。</p>
+          </div>
+        </div>
+        <div class="feature-card animate-on-scroll stagger-2">
+          <div class="feature-card-image">
+            <img src="图片/6.png" alt="套件组合">
+          </div>
+          <div class="feature-card-body">
+            <h3>套件组合</h3>
+            <p>基于用户训练计划和实时咬合评估，利用不同卡头，气囊调节压力大小位置，个性化定制训练强度。</p>
+          </div>
+        </div>
+        <div class="feature-card animate-on-scroll stagger-3">
+          <div class="feature-card-image">
+            <img src="图片/5.png" alt="听觉反馈">
+          </div>
+          <div class="feature-card-body">
+            <h3>听觉反馈</h3>
+            <p>根据咬合位置、模块组件和咬合力产生不同听觉反馈，实时引导训练，增强训练效果。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Section -->
+  <section id="tech" class="section section-dark animate-on-scroll">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-number">04</p>
+        <h2 class="section-title">技术原理</h2>
+      </div>
+      <div class="tech-main-layout">
+        <div class="tech-left">
+          <div class="tech-content animate-on-scroll stagger-1">
+            <h3>离心轴驱动 · 精准控制</h3>
+            <p>该装置采用离心轴机构，电机启动后驱动减速齿轮以降低轴转速。旋转轴产生的离心力驱动活塞充气气囊，从而在训练过程中实现对咬合力的精确控制。</p>
+            <p>该装置采用离心驱动活塞式气动结构，旋转轴产生的离心力驱动活塞为气囊充放气，通过气囊体积的胀缩实现咬合力的精准调节与控制。</p>
+          </div>
+
+          <div class="tech-diagram-section">
+            <p class="tech-diagram-title">工作原理</p>
+            <div class="tech-diagram-grid">
+              <div class="tech-diagram-item animate-on-scroll stagger-2">
+                <img src="Group 11.png" alt="减速机构">
+                <p>电机驱动减速齿轮，降低轴转速，产生稳定离心力</p>
+              </div>
+              <div class="tech-diagram-item animate-on-scroll stagger-3">
+                <img src="666 1.png" alt="气动结构">
+                <p>离心力驱动活塞为气囊充放气，实现咬合力精准调节</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tech-right animate-on-scroll stagger-1">
+          <img src="Group 30.png" alt="爆炸图">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Section -->
+  <section id="app" class="section section-alt animate-on-scroll">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-number">05</p>
+        <h2 class="section-title">智能App</h2>
+      </div>
+      <div class="app-showcase-layout">
+        <div class="app-showcase-left animate-on-scroll stagger-1">
+          <h3>医患双端 · AI辅助</h3>
+          <p>产品配套移动App与医院系统连接，提供家长端和医疗专业人员端的双重界面。训练过程中实时记录不同位置的咬合力数据。</p>
+          <p>AI与医学专家协作分析数据，支持远程诊断。发现异常时，系统可快速联系指定医生进行及时干预。</p>
+
+          <div class="app-features">
+            <div class="app-feature">
+              <h4>AI诊断</h4>
+              <p>智能分析肌肉发育</p>
+            </div>
+            <div class="app-feature">
+              <h4>远程诊断</h4>
+              <p>医生在线查看数据</p>
+            </div>
+            <div class="app-feature">
+              <h4>训练指导</h4>
+              <p>家长使用引导</p>
+            </div>
+            <div class="app-feature">
+              <h4>数据追踪</h4>
+              <p>咬合趋势记录</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="app-showcase-right animate-on-scroll stagger-2">
+          <div class="app-phone-stack">
+            <div class="app-phone app-phone-1">
+              <img src="软件/iPhone 16 - 2 1.png" alt="训练界面">
+            </div>
+            <div class="app-phone app-phone-2">
+              <img src="软件/iPhone 16 - 3 1.png" alt="训练界面">
+            </div>
+            <div class="app-phone app-phone-3">
+              <img src="软件/iPhone 16 - 9 1.png" alt="数据界面">
+            </div>
+            <div class="app-phone app-phone-4">
+              <img src="软件/iPhone 16 - 8 1.png" alt="连接界面">
+            </div>
+            <div class="app-phone app-phone-5">
+              <img src="软件/iPhone 16 - 1 3.png" alt="患者界面">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Award Section -->
+  <section id="award" class="section section-alt usage-section animate-on-scroll">
+    <div class="usage-section-bg">
+      <img src="12.png" alt="背景">
+    </div>
+    <div class="container">
+      <div class="section-header">
+        <p class="section-number">07</p>
+        <h2 class="section-title">使用方法</h2>
+      </div>
+      <div class="usage-steps-right">
+        <div class="usage-step-img animate-on-scroll stagger-1">
+          <img src="Group 33.png" alt="步骤1">
+        </div>
+        <div class="usage-step-img animate-on-scroll stagger-2">
+          <img src="Group 32.png" alt="步骤2">
+        </div>
+        <div class="usage-step-img animate-on-scroll stagger-3">
+          <img src="Group 31.png" alt="步骤3">
+        </div>
+        <div class="usage-step-img animate-on-scroll stagger-4">
+          <img src="输出额 2.png" alt="步骤4">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Red Dot Award Section -->
+  <section id="reddot" class="animate-on-scroll">
+    <div class="reddot-bg">
+      <div class="reddot-left">
+        <div class="reddot-content">
+          <div class="reddot-badge">
+            <span class="reddot-year">2025</span>
+            <span class="reddot-name">Red Dot</span>
+          </div>
+          <h2 class="reddot-title">Red Dot Design Award</h2>
+          <p class="reddot-subtitle">红点设计 · 概念设计奖</p>
+          <div class="reddot-divider"></div>
+          <p class="reddot-description">
+            YAO 凭借创新的儿童口腔肌肉训练系统，荣获红点概念设计。评审团高度认可其在儿童口腔健康领域的设计创新与用户体验优化。
+          </p>
+          <div class="reddot-features">
+            <div class="reddot-feature">
+              <span class="reddot-feature-icon">◎</span>
+              <span>磁吸式儿童友好设计</span>
+            </div>
+            <div class="reddot-feature">
+              <span class="reddot-feature-icon">◎</span>
+              <span>游戏化训练体验</span>
+            </div>
+            <div class="reddot-feature">
+              <span class="reddot-feature-icon">◎</span>
+              <span>口腔肌肉科学训练</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reddot-right">
+        <div class="reddot-image-wrapper">
+          <img src="3.png" alt="YAO Product" class="reddot-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section animate-on-scroll">
+    <h2>了解更多作品</h2>
+    <a href="../index.html" class="btn">返回作品集</a>
+  </section>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Intro Product Carousel
+    (function initIntroCarousel() {
+      const introCarousel = document.getElementById('introCarousel');
+      if (!introCarousel) return;
+
+      const introTrack = introCarousel.querySelector('.intro-product-carousel-track');
+      const introSlides = introTrack.querySelectorAll('.intro-product-carousel-slide');
+      const prevBtn = document.getElementById('carouselPrev');
+      const nextBtn = document.getElementById('carouselNext');
+      let introCurrent = 0;
+      const total = introSlides.length;
+
+      function updateIntroCarousel() {
+        introTrack.style.transform = 'translateX(-' + (introCurrent * 100) + '%)';
+      }
+
+      prevBtn.addEventListener('click', function() {
+        introCurrent = (introCurrent - 1 + total) % total;
+        updateIntroCarousel();
+      });
+
+      nextBtn.addEventListener('click', function() {
+        introCurrent = (introCurrent + 1) % total;
+        updateIntroCarousel();
+      });
+
+      updateIntroCarousel();
+    })();
+  </script>
+</body>
+</html>

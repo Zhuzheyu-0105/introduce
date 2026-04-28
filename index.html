@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朱哲宇 — 产品经理 / 工业设计师</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN TOKENS — Figma tokens.json exact values
+   ============================================================ */
+:root {
+  /* Colors */
+  --bg: #FFFFFF;
+  --bg-alt: #F5F5F7;
+  --text: #000000;
+  --text-secondary: #7B7B7B;
+  --text-tertiary: #ABABAE;
+  --accent: #007AFF;
+  --accent-dark: #0071E3;
+  --border: rgba(0,0,0,0.06);
+  --border-light: rgba(0,0,0,0.08);
+
+  /* Typography — PingFang SC → Noto Sans SC */
+  --font: 'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout — Apple 8px grid */
+  --page-max: 980px;
+  --page-wide: 1200px;
+  --content-pad-x: 24px;
+  --section-pad-y: 80px;
+
+  /* Radius — Figma tokens.json */
+  --radius: 21.5px;
+  --radius-sm: 12px;
+  --radius-img: 33px;
+
+  /* Shadow — Apple style */
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* Reset */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-width: 320px;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-dark); }
+img { display: block; max-width: 100%; }
+
+/* ============================================================
+   LAYOUT HELPERS
+   ============================================================ */
+.container {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--content-pad-x);
+}
+.container--wide {
+  max-width: var(--page-wide);
+  margin: 0 auto;
+  padding: 0 var(--content-pad-x);
+}
+
+/* ============================================================
+   NAVIGATION — Apple style frosted glass
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+.nav.scrolled {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: var(--page-wide);
+  width: 100%;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  letter-spacing: -0.01em;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* Hamburger menu button — mobile only */
+.nav-hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  color: var(--text);
+  transition: background 0.2s;
+}
+.nav-hamburger:hover { background: rgba(0,0,0,0.05); }
+.nav-hamburger svg { display: block; }
+
+/* Mobile nav drawer */
+.nav-mobile-drawer {
+  display: none;
+  position: fixed;
+  top: 52px;
+  left: 0; right: 0;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 999;
+  padding: 8px 0 16px;
+}
+.nav-mobile-drawer.open { display: block; }
+.nav-mobile-drawer ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.nav-mobile-drawer li a {
+  display: block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  transition: background 0.15s;
+}
+.nav-mobile-drawer li a:hover {
+  background: rgba(0,0,0,0.04);
+  color: var(--text);
+}
+
+/* ============================================================
+   SECTION HEADER — shared label style
+   ============================================================ */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.section-label-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+.section-title {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.section-subtitle {
+  font-size: clamp(14px, 2vw, 20px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   DESKTOP-1 — HERO
+   Full viewport height, centered, pure white
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 100px;
+  background: var(--bg);
+  position: relative;
+}
+
+/* Subtle Apple-style background grid lines */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border-light);
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  margin-bottom: 32px;
+}
+.hero-badge-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+}
+
+.hero-name {
+  font-size: clamp(52px, 10vw, 112px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-size: clamp(16px, 2.5vw, 24px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+  margin-bottom: 40px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.hero-btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+.hero-btn--primary:hover {
+  background: var(--accent-dark);
+  color: #fff;
+}
+.hero-btn--secondary {
+  background: var(--bg-alt);
+  color: var(--text);
+  border: 1px solid var(--border-light);
+}
+.hero-btn--secondary:hover {
+  background: rgba(0,0,0,0.06);
+  color: var(--text);
+}
+.hero-btn-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-tertiary);
+}
+.hero-scroll-indicator span {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--text-tertiary), transparent);
+}
+
+/* ============================================================
+   DESKTOP-2 — 个人介绍
+   bg=#F5F5F7, structured text layout
+   ============================================================ */
+.about-section {
+  padding: var(--section-pad-y) 0;
+  background: var(--bg-alt);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px 80px;
+  align-items: start;
+  margin-top: 56px;
+}
+.about-col-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+}
+.about-school-name {
+  font-size: clamp(20px, 3.5vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.about-school-sub {
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.about-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--border-light);
+  margin: 20px 0;
+}
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+.about-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  background: rgba(0,122,255,0.08);
+  color: var(--accent);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.about-tag-icon {
+  width: 12px;
+  height: 12px;
+}
+.about-honor-line {
+  font-size: clamp(13px, 1.5vw, 16px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: -0.005em;
+  line-height: 1.7;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.honor-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  flex-shrink: 0;
+  margin-top: 9px;
+}
+
+/* ============================================================
+   DESKTOP-3 — 获奖项目
+   Apple iPhone 页面同款：edge-to-edge 全宽滚动轨道
+   ============================================================ */
+.awards-section {
+  padding: var(--section-pad-y) 0 0;
+  background: rgba(245,245,247,0.75);
+  overflow: hidden; /* 裁掉两侧溢出 */
+}
+
+/* 标题行限制在内容宽度内 */
+.awards-header {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--content-pad-x);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+  gap: 20px;
+}
+.awards-header .section-title {
+  margin-bottom: 0;
+}
+
+/* Apple 风格的 "查看全部" 箭头链接 */
+.awards-nav-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--accent);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 0.2s;
+  padding-bottom: 6px;
+}
+.awards-nav-inline:hover { color: var(--accent-dark); }
+.awards-nav-inline svg { width: 14px; height: 14px; transition: transform 0.2s; }
+.awards-nav-inline:hover svg { transform: translateX(2px); }
+
+/*
+  滚动轨道：突破 container 限制，真正 edge-to-edge
+  left: 50% + translateX(-50%) 让轨道以页面中心对齐，宽度撑满 100vw
+*/
+.awards-scroll-wrapper {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50%);
+  /* 右侧渐变遮罩——提示还有更多内容 */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    black 48px,
+    black calc(100% - 80px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0px,
+    black 48px,
+    black calc(100% - 80px),
+    transparent 100%
+  );
+}
+
+.awards-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* 首张卡片从页面内容左边距开始，末尾留出"还有下一张"的预览空间 */
+  padding: 8px calc(50vw - var(--page-max)/2 + var(--content-pad-x)) 36px;
+  padding-right: 80px;
+}
+.awards-grid::-webkit-scrollbar { display: none; }
+
+.award-card {
+  /* 桌面：固定宽度，保证一屏能完整看到约 2.5 张 */
+  flex: 0 0 clamp(260px, 30vw, 360px);
+  background: var(--bg);
+  border-radius: var(--radius-img);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.3s, transform 0.3s;
+  scroll-snap-align: start;
+  /* 底部留白让阴影不被裁掉 */
+  margin-bottom: 4px;
+}
+.award-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+.award-card-img {
+  width: 100%;
+  aspect-ratio: 261/300;
+  background: #D9D9D9;
+  border-radius: var(--radius-img) var(--radius-img) 0 0;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.award-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Placeholder when no image */
+.award-card-img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #aaa;
+}
+.award-card-img-placeholder-icon {
+  width: 32px;
+  height: 32px;
+  opacity: 0.4;
+}
+.award-card-img-placeholder span {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.award-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.award-badge img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.award-card-body {
+  padding: 20px 18px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.award-card-title {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.award-card-year {
+  font-size: clamp(11px, 1.2vw, 14px);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  margin-bottom: 14px;
+  letter-spacing: 0.01em;
+}
+.award-card-desc {
+  font-size: clamp(12px, 1.2vw, 14px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  flex: 1;
+  margin-bottom: 14px;
+}
+.award-card-footer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+.award-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+  cursor: pointer;
+}
+.award-btn-icon { width: 12px; height: 12px; }
+.award-btn-primary {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-secondary) !important;
+}
+.award-btn-primary:hover {
+  background: var(--accent);
+  color: #fff !important;
+  opacity: 1;
+}
+.award-btn-ghost {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-secondary) !important;
+}
+.award-btn-ghost:hover {
+  background: var(--accent);
+  color: #fff !important;
+}
+.award-card--coming-soon {
+  opacity: 0.55;
+  cursor: default;
+}
+.award-card--coming-soon:hover {
+  box-shadow: var(--shadow-card);
+  transform: none;
+}
+.award-btn-muted {
+  background: rgba(0,0,0,0.05);
+  color: var(--text-tertiary);
+}
+
+/* 标题行右侧的导航按钮组（Apple 风格） */
+.awards-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding-bottom: 4px;
+}
+.awards-nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.06);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, opacity 0.2s, transform 0.18s cubic-bezier(0.25,0.46,0.45,0.94);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+.awards-nav-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.18s cubic-bezier(0.25,0.46,0.45,0.94);
+  display: block;
+}
+.awards-nav-btn:hover {
+  background: rgba(0,0,0,0.12);
+}
+/* 左箭头 hover 时图标向左偏移 */
+.awards-nav-btn--prev:hover svg { transform: translateX(-2px); }
+/* 右箭头 hover 时图标向右偏移 */
+.awards-nav-btn--next:hover svg { transform: translateX(2px); }
+/* 按下瞬间整个按钮轻微缩小 */
+.awards-nav-btn:active { transform: scale(0.92); }
+/* 禁用态 */
+.awards-nav-btn:disabled {
+  opacity: 0.28;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ============================================================
+   DESKTOP-4 — 项目经验
+   bg=#FFF, Apple-style: number left, tags+button right on same baseline
+   ============================================================ */
+.projects-section {
+  padding: var(--section-pad-y) 0;
+  background: var(--bg);
+}
+.projects-section .section-title { margin-bottom: 8px; }
+.projects-section .section-subtitle { margin-bottom: 56px; }
+
+.project-item {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.project-item:first-of-type { padding-top: 0; }
+.project-item:last-child { border-bottom: none; }
+
+/* Header row: left = index+title+meta, right = metrics (aligned bottom) */
+.project-header {
+  display: flex;
+  align-items: flex-end; /* baseline align */
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 24px;
+}
+.project-title-block { flex: 1; }
+
+/* Index label */
+.project-index {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.project-index-icon { width: 14px; height: 14px; }
+
+/* Title */
+.project-title {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+/* Meta (用点分隔，类似 Apple) */
+.project-meta {
+  font-size: clamp(13px, 1.5vw, 15px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: -0.005em;
+}
+
+/* 数字指标：右上角，和 title baseline 对齐 */
+.project-metrics {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  flex-shrink: 0;
+  padding-bottom: 2px;
+}
+.project-metric { text-align: right; }
+.project-metric-num {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.project-metric-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* 描述文字 */
+.project-desc {
+  font-size: clamp(13px, 1.5vw, 15px);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.65;
+  letter-spacing: -0.005em;
+  margin-bottom: 20px;
+}
+
+/* 标签行 + Github 按钮：底部右对齐，baseline 对齐 */
+.project-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.project-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: var(--bg-alt);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+.project-tag-icon { width: 12px; height: 12px; opacity: 0.5; }
+.project-tag--blue {
+  background: rgba(0,122,255,0.08);
+  color: var(--accent);
+}
+.project-github-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+  background: var(--text);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.project-github-btn:hover { background: #333; }
+.project-github-btn-icon { width: 14px; height: 14px; }
+
+/* ============================================================
+   DESKTOP-5 — 工作经历
+   bg=#F5F5F7, Apple-style: title/meta/desc full width, bottom row: metrics left + button right
+   ============================================================ */
+.experience-section {
+  padding: var(--section-pad-y) 0;
+  background: var(--bg-alt);
+}
+.experience-section .section-title { margin-bottom: 8px; }
+.experience-section .section-subtitle { margin-bottom: 48px; }
+
+.exp-period-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  margin-bottom: 48px;
+}
+.exp-period-icon { width: 14px; height: 14px; opacity: 0.6; }
+
+.exp-company-group {
+  margin-bottom: 16px;
+}
+.exp-company-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+.exp-company-label-icon { width: 14px; height: 14px; opacity: 0.5; }
+
+.exp-card {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.exp-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+.exp-card:last-child { margin-bottom: 0; }
+
+/* 标题 */
+.exp-card-title {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+/* 副标题：用点分隔 */
+.exp-card-meta {
+  font-size: clamp(12px, 1.3vw, 14px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  letter-spacing: -0.005em;
+}
+/* 描述 */
+.exp-card-desc {
+  font-size: clamp(12px, 1.3vw, 14px);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* 底部一行：左边数字 + 标签，右边按钮 */
+.exp-card-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.exp-card-metrics {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.exp-metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.exp-metric-num {
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--accent);
+}
+.exp-metric-label {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+
+/* 标签（和数字同一行，左边） */
+.exp-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.exp-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  background: var(--bg-alt);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.005em;
+}
+.exp-tag-icon { width: 12px; height: 12px; opacity: 0.5; }
+
+/* 按钮（右边） */
+.exp-card-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  background: rgba(0,122,255,0.08);
+  transition: background 0.2s;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.exp-card-action:hover { background: rgba(0,122,255,0.15); color: var(--accent); }
+.exp-card-action-icon { width: 12px; height: 12px; }
+
+/* 状态徽章 */
+.exp-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.exp-status-badge--success {
+  background: rgba(52,199,89,0.12);
+  color: #34C759;
+}
+.exp-status-badge--muted {
+  background: rgba(0,0,0,0.06);
+  color: var(--text-tertiary);
+}
+.exp-status-icon { width: 11px; height: 11px; }
+
+.exp-divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+  margin: 40px 0;
+}
+
+.exp-company-block {
+  padding-top: 40px;
+}
+.exp-company-title {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.exp-company-meta {
+  font-size: clamp(12px, 1.3vw, 14px);
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+.exp-company-desc {
+  font-size: clamp(12px, 1.3vw, 14px);
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.6;
+  max-width: 520px;
+}
+.exp-company-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  padding: 40px 24px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.footer-inner {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.footer-logo-icon {
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+}
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+.footer-links a {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--text-secondary); }
+
+/* ============================================================
+   APPLE-STYLE SCROLL ANIMATIONS
+   ============================================================ */
+
+/* Base state: hidden before animation triggers */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: opacity, transform;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for child elements */
+.reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.reveal-stagger.revealed > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+.reveal-stagger.revealed > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.1s; }
+.reveal-stagger.revealed > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.2s; }
+.reveal-stagger.revealed > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.3s; }
+.reveal-stagger.revealed > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.4s; }
+.reveal-stagger.revealed > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.5s; }
+
+/* Fade only (no Y shift) — for full-width elements */
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+.reveal-fade.revealed { opacity: 1; }
+
+/* Scale-up variant — for cards */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.97) translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Hero entrance — plays immediately on load */
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-badge    { animation: heroFadeUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.1s both; }
+.hero-name     { animation: heroFadeUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.25s both; }
+.hero-title    { animation: heroFadeUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s both; }
+.hero-actions  { animation: heroFadeUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.55s both; }
+.hero-scroll-indicator { animation: heroFadeUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.8s both; }
+
+/* Scroll-line pulse animation */
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.15); }
+}
+.scroll-line { animation: scrollPulse 2s ease-in-out infinite; transform-origin: top; }
+
+/* Section number counter — count-up feel via opacity cascade */
+@keyframes numCountUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.project-metric-num,
+.exp-metric-num {
+  display: inline-block;
+}
+.reveal-scale.revealed .project-metric-num,
+.reveal.revealed .exp-metric-num {
+  animation: numCountUp 0.5s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s both;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  :root { --section-pad-y: 64px; }
+  .project-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .project-metrics { justify-content: flex-start; }
+}
+@media (max-width: 768px) {
+  :root { --content-pad-x: 20px; --section-pad-y: 56px; }
+  .awards-header { flex-direction: column; align-items: flex-start; gap: 16px; padding: 0 var(--content-pad-x); }
+  .awards-nav-actions { padding-bottom: 0; }
+  .awards-grid { padding-left: var(--content-pad-x); }
+  .project-header { flex-direction: column; gap: 16px; }
+  .project-metrics { gap: 20px; justify-content: flex-start; }
+  .project-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .exp-card-metrics { align-items: flex-start; flex-direction: row; gap: 24px; }
+  .exp-metric-item { text-align: left; }
+  .exp-card-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .hero-actions { gap: 12px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .awards-grid {
+    gap: 12px;
+    padding-right: 60px;
+  }
+  .hero-name { font-size: 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">朱哲宇</a>
+    <ul class="nav-links">
+      <li><a href="#about">关于</a></li>
+      <li><a href="#awards">获奖</a></li>
+      <li><a href="#projects">项目</a></li>
+      <li><a href="#experience">经历</a></li>
+    </ul>
+    <button class="nav-hamburger" id="navHamburger" aria-label="菜单" aria-expanded="false">
+      <svg id="hamburgerIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav drawer -->
+<div class="nav-mobile-drawer" id="navDrawer">
+  <ul>
+    <li><a href="#about" class="nav-drawer-link">关于</a></li>
+    <li><a href="#awards" class="nav-drawer-link">获奖</a></li>
+    <li><a href="#projects" class="nav-drawer-link">项目</a></li>
+    <li><a href="#experience" class="nav-drawer-link">经历</a></li>
+  </ul>
+</div>
+
+<!-- ===================== DESKTOP-1: HERO ===================== -->
+<section class="hero" id="hero">
+  <div class="hero-badge">
+    <!-- Graduate student icon -->
+    <svg class="hero-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+      <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+    </svg>
+    产品经理 · 工业设计师
+  </div>
+
+  <h1 class="hero-name">朱哲宇</h1>
+  <p class="hero-title">浙江大学 · 计算机学院 · 工业设计工程</p>
+
+  <div class="hero-actions">
+    <a href="#projects" class="hero-btn hero-btn--primary">
+      <!-- Arrow down icon -->
+      <svg class="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 3h18M3 9h18M3 15h18M3 21h18"/>
+      </svg>
+      查看项目
+    </a>
+    <a href="#experience" class="hero-btn hero-btn--secondary">
+      <!-- Briefcase icon -->
+      <svg class="hero-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2"/>
+        <path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/>
+      </svg>
+      工作经历
+    </a>
+  </div>
+
+  <div class="hero-scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===================== DESKTOP-2: 个人介绍 ===================== -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="section-label reveal">
+      <!-- User icon -->
+      <svg class="section-label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+      个人介绍
+    </div>
+
+    <div class="about-grid reveal-stagger">
+      <!-- Left col: School -->
+      <div>
+        <div class="about-col-label">教育背景</div>
+        <div class="about-school-name">浙江大学</div>
+        <div class="about-school-sub">计算机学院 · 工业设计工程</div>
+        <div class="about-school-sub">硕士在读 · 2027 年毕业</div>
+
+        <div class="about-divider"></div>
+
+        <div class="about-col-label">研究方向</div>
+        <div class="about-school-sub">绿色设计与智能装备实验室</div>
+        <div class="about-school-sub">智能产品设计与系统设计</div>
+
+        <div class="about-tags">
+          <span class="about-tag">
+            <svg class="about-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+            </svg>
+            可持续发展
+          </span>
+          <span class="about-tag">
+            <svg class="about-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            智能装备
+          </span>
+        </div>
+      </div>
+
+      <!-- Right col: Honors -->
+      <div>
+        <div class="about-col-label">荣誉奖项</div>
+        <div class="about-honor-line">
+          <div class="honor-dot"></div>
+          2025 Red Dot Concept Award — YAO
+        </div>
+        <div class="about-honor-line">
+          <div class="honor-dot"></div>
+          2025 Red Dot Concept Award — Bi
+        </div>
+        <div class="about-honor-line">
+          <div class="honor-dot"></div>
+          2025 IDA Silver Award — O light
+        </div>
+        <div class="about-honor-line">
+          <div class="honor-dot"></div>
+          米兰设计周省赛二等奖 ×3
+        </div>
+        <div class="about-honor-line">
+          <div class="honor-dot"></div>
+          浙江大学计算机学院优秀研究生
+        </div>
+        <div class="about-honor-line">
+          <div class="honor-dot"></div>
+          蘑菇街时尚基金奖学金一等奖
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 获奖项目区域 → 移到 awards section -->
+
+  </div>
+</section>
+
+<!-- ===================== DESKTOP-3: 获奖项目 ===================== -->
+<section class="awards-section" id="awards">
+
+  <!-- 标题行：自带 max-width + margin auto，与正文对齐 -->
+  <div class="awards-header reveal">
+    <div>
+      <div class="section-label">
+        <svg class="section-label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+          <path d="M4 22h16"/>
+          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+        </svg>
+        获奖项目
+      </div>
+      <h2 class="section-title">国际设计奖项认可</h2>
+    </div>
+    <div class="awards-nav-actions">
+      <button class="awards-nav-btn awards-nav-btn--prev" id="awardsPrev" onclick="scrollAwards(-1)" aria-label="向左滚动" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <button class="awards-nav-btn awards-nav-btn--next" id="awardsNext" onclick="scrollAwards(1)" aria-label="向右滚动">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- edge-to-edge 全宽滚动轨道 -->
+  <div class="awards-scroll-wrapper">
+    <div class="awards-grid" id="awardsGrid">
+
+      <!-- Card 1: YAO -->
+      <div class="award-card reveal-scale" data-href="YAO/index.html">
+        <div class="award-card-img">
+          <img src="images/awards/yao.jpg" alt="YAO">
+          <div class="award-badge">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#D0021B"/>
+              <text x="12" y="16" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="sans-serif">R</text>
+            </svg>
+          </div>
+        </div>
+        <div class="award-card-body">
+          <h3 class="award-card-title">YAO</h3>
+          <p class="award-card-year">Red Dot Concept Award · 2025</p>
+          <p class="award-card-desc">儿童口腔唇肌训练器，康复唇咬肌无力与言语发育迟缓</p>
+          <div class="award-card-footer">
+            <a href="YAO/index.html" class="award-btn award-btn-ghost">
+              了解详情
+            </a>
+            <a href="https://www.red-dot.org/zh/project/yao-83122" target="_blank" rel="noopener" class="award-btn award-btn-primary">
+              <svg class="award-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+              进一步了解
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Bi -->
+      <div class="award-card reveal-scale" style="transition-delay:0.08s" data-href="Bi/index.html">
+        <div class="award-card-img">
+          <img src="images/awards/bi.png" alt="Bi">
+          <div class="award-badge">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#D0021B"/>
+              <text x="12" y="16" text-anchor="middle" font-size="9" font-weight="700" fill="#fff" font-family="sans-serif">R</text>
+            </svg>
+          </div>
+        </div>
+        <div class="award-card-body">
+          <h3 class="award-card-title">Bi</h3>
+          <p class="award-card-year">Red Dot Concept Award · 2025</p>
+          <p class="award-card-desc">老年人鼻腔修复医疗产品</p>
+          <div class="award-card-footer">
+            <a href="Bi/index.html" class="award-btn award-btn-ghost">
+              了解详情
+            </a>
+            <a href="https://www.red-dot.org/zh/project/bi-83275" target="_blank" rel="noopener" class="award-btn award-btn-primary">
+              <svg class="award-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+              进一步了解
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: O light -->
+      <a href="olight/index.html" class="award-card reveal-scale" style="transition-delay:0.16s; text-decoration: none; color: inherit;">
+        <div class="award-card-img">
+          <img src="images/awards/o-light.png" alt="O light">
+          <div class="award-badge">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#007AFF"/>
+              <text x="12" y="16" text-anchor="middle" font-size="8" font-weight="700" fill="#fff" font-family="sans-serif">IDA</text>
+            </svg>
+          </div>
+        </div>
+        <div class="award-card-body">
+          <h3 class="award-card-title">O light</h3>
+          <p class="award-card-year">IDA Silver Award · 2025</p>
+          <p class="award-card-desc">手机外置照明灯，重新定义手机拍摄体验</p>
+          <div class="award-card-footer">
+            <span class="award-btn award-btn-ghost">
+              了解详情
+            </span>
+            <span class="award-btn award-btn-primary">
+              <svg class="award-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+              进一步了解
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 4: Lips -->
+      <div class="award-card reveal-scale" style="transition-delay:0.24s">
+        <div class="award-card-img">
+          <img src="images/awards/lips.png" alt="Lips">
+        </div>
+        <div class="award-card-body">
+          <h3 class="award-card-title">Lips</h3>
+          <p class="award-card-year">European Product Award · 2018</p>
+          <p class="award-card-desc">口红色号试纸</p>
+          <div class="award-card-footer">
+            <a href="#" class="award-btn award-btn-ghost">
+              了解详情
+            </a>
+            <span class="award-btn award-btn-primary">
+              <svg class="award-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+              进一步了解
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /awards-scroll-wrapper -->
+
+</section>
+
+<!-- ===================== DESKTOP-4: 项目经验 ===================== -->
+<section class="projects-section" id="projects">
+  <div class="container">
+    <div class="section-label reveal">
+      <!-- Layers icon -->
+      <svg class="section-label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+        <polyline points="2 17 12 22 22 17"/>
+        <polyline points="2 12 12 17 22 12"/>
+      </svg>
+      项目经验
+    </div>
+    <h2 class="section-title reveal">硕士项目经历</h2>
+    <p class="section-subtitle reveal" style="transition-delay:0.1s">2024 — 至今</p>
+
+    <!-- Project 1 -->
+    <div class="project-item reveal">
+      <div class="project-header">
+        <div class="project-title-block">
+          <div class="project-index">
+            <svg class="project-index-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="2" x2="12" y2="22"/>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+            01
+          </div>
+          <h3 class="project-title">物产中大桐乡污水厂中水回用项目</h3>
+          <p class="project-meta">产品经理 · 设计负责人 · 2025 — 至今</p>
+        </div>
+        <div class="project-metrics">
+          <div class="project-metric">
+            <div class="project-metric-num">30%</div>
+            <div class="project-metric-label">吨水成本降低</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-num">1</div>
+            <div class="project-metric-label">项发明专利</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-num">1</div>
+            <div class="project-metric-label">项软件著作权</div>
+          </div>
+        </div>
+      </div>
+      <p class="project-desc">首创 iFS 离子精筛膜 + 矩阵式前处理中水回用框架，解决生活废水回用难题。<br>开发智能水处理平台，模拟中水通过不同膜元件处理效果，实时监控水质变化。</p>
+      <div class="project-bottom">
+        <div class="project-tags">
+          <span class="project-tag">
+            <svg class="project-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+            水处理
+          </span>
+          <span class="project-tag project-tag--blue">
+            <svg class="project-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/>
+              <circle cx="6" cy="18" r="3"/>
+              <circle cx="18" cy="16" r="3"/>
+            </svg>
+            发明专利（审查中）
+          </span>
+          <span class="project-tag project-tag--blue">
+            <svg class="project-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+            软著（撰写中）
+          </span>
+        </div>
+        <a href="https://github.com/Zhuzheyu-0105/water-treatment-platform" target="_blank" rel="noopener" class="project-github-btn">
+          <svg class="project-github-btn-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          Github
+        </a>
+      </div>
+    </div>
+
+    <hr class="exp-divider">
+
+    <!-- Project 2 -->
+    <div class="project-item reveal" style="transition-delay:0.05s">
+      <div class="project-header">
+        <div class="project-title-block">
+          <div class="project-index">
+            <svg class="project-index-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            02
+          </div>
+          <h3 class="project-title">iFS 离子精筛膜全屋净水设备</h3>
+          <p class="project-meta">产品经理 · 设计负责人 · 2025 — 至今</p>
+        </div>
+        <div class="project-metrics">
+          <div class="project-metric">
+            <div class="project-metric-num">20%</div>
+            <div class="project-metric-label">废水率降低</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-num">2</div>
+            <div class="project-metric-label">项实用新型专利</div>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">解决家用净水设备废水率高、维护复杂的问题，重新定义全屋净水标准。</p>
+      <div class="project-bottom">
+        <div class="project-tags">
+          <span class="project-tag">
+            <svg class="project-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+            </svg>
+            净水设备
+          </span>
+          <span class="project-tag project-tag--blue">
+            <svg class="project-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"/>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+            昆山成果转化项目
+          </span>
+          <span class="project-tag project-tag--blue">
+            <svg class="project-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/>
+              <circle cx="6" cy="18" r="3"/>
+              <circle cx="18" cy="16" r="3"/>
+            </svg>
+            实用新型专利（审查中）
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <hr class="exp-divider">
+
+    <!-- Project 3 -->
+    <div class="project-item reveal" style="transition-delay:0.05s">
+      <div class="project-header">
+        <div class="project-title-block">
+          <div class="project-index">
+            <svg class="project-index-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+            03
+          </div>
+          <h3 class="project-title">新疆喀什红无人车运输项目</h3>
+          <p class="project-meta">产品经理 · 设计负责人 · 2025</p>
+        </div>
+        <div class="project-metrics">
+          <div class="project-metric">
+            <div class="project-metric-num">25%</div>
+            <div class="project-metric-label">坏果率降低</div>
+          </div>
+        </div>
+      </div>
+      <p class="project-desc">针对新疆荒漠路况，无人车运行困难，重新设计减震底盘结构，优化车轮设计。</p>
+      <div class="project-bottom">
+        <div class="project-tags">
+          <span class="project-tag">
+            <svg class="project-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+            无人车
+          </span>
+          <span class="project-tag project-tag--blue">
+            <svg class="project-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+            实测数据验证
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== DESKTOP-5: 工作经历 ===================== -->
+<section class="experience-section" id="experience">
+  <div class="container">
+    <div class="section-label reveal">
+      <!-- Briefcase icon -->
+      <svg class="section-label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2"/>
+        <path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/>
+      </svg>
+      工作经历
+    </div>
+    <h2 class="section-title reveal">三年工作经验</h2>
+    <p class="section-subtitle reveal" style="transition-delay:0.1s">本科毕业后 · 2021 — 2024</p>
+
+    <!-- 嘀米科技 label -->
+    <div class="exp-company-group reveal" style="transition-delay:0.15s">
+      <div class="exp-company-label">
+        <svg class="exp-company-label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        嘀米科技
+      </div>
+
+      <!-- 米家冷风扇 -->
+      <div class="exp-card reveal">
+        <div class="exp-card-top">
+          <div>
+            <h3 class="exp-card-title">嘀米科技 · 米家冷风扇</h3>
+            <p class="exp-card-meta">产品助理 · 助理工业设计师 · 2022 — 2023</p>
+            <p class="exp-card-desc">针对传统冷风扇换水繁琐、移动受限的用户痛点，提出"无线水箱"创新方案。</p>
+          </div>
+        </div>
+        <div class="exp-card-bottom">
+          <a href="https://www.xiaomiyoupin.com/detail?gid=159771&spmref=YouPinPC.$SearchFilter$1.search_list.3.27466050&last_scmv2=3001.21.1:zero-3:zero-4:zero-5:zero-6:zero-7:zero.0.0&scmv2_num=0" target="_blank" rel="noopener" class="exp-card-action">
+            <svg class="exp-card-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+            </svg>
+            有品直达
+          </a>
+          <div class="exp-card-metrics">
+            <div class="exp-metric-item">
+              <span class="exp-metric-num">5W+</span>
+              <span class="exp-metric-label">累计销量</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-card-top">
+          <div>
+            <h3 class="exp-card-title">嘀米科技 · 造梦者储能业务</h3>
+            <p class="exp-card-meta">产品助理 · 助理工业设计师 · 2022 — 2023</p>
+            <p class="exp-card-desc">传统储能系统孤立运行（光伏/储能/汽车/热泵独立运作），重新设计联动系统，搭建造梦者储能家用系统。</p>
+          </div>
+        </div>
+        <div class="exp-card-bottom">
+          <a href="https://www.dm-maker.com/Product/system.html" target="_blank" rel="noopener" class="exp-card-action">
+            <svg class="exp-card-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+            </svg>
+            官网链接
+          </a>
+          <div class="exp-card-metrics">
+            <div class="exp-metric-item">
+              <span class="exp-metric-num">20+</span>
+              <span class="exp-metric-label">落地产品</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-card-top">
+          <div>
+            <h3 class="exp-card-title">嘀米科技 · 米家挂脖空调</h3>
+            <p class="exp-card-meta">产品经理 · 项目主设 · 2023</p>
+            <p class="exp-card-desc">竞品核心专利封锁热管理系统、出风系统，产品最终无法落地。</p>
+          </div>
+        </div>
+        <div class="exp-card-bottom">
+          <span class="exp-status-badge exp-status-badge--muted">
+            <svg class="exp-status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M15 9l-6 6M9 9l6 6"/>
+            </svg>
+            未落地
+          </span>
+        </div>
+    </div>
+
+    <hr class="exp-divider">
+
+    <!-- 红狐工业设计 -->
+    <div class="exp-company-group reveal">
+      <div class="exp-company-label">
+        <svg class="exp-company-label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        红狐工业设计有限公司
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-card-top">
+          <div>
+            <h3 class="exp-card-title">初级工业设计师</h3>
+            <p class="exp-card-meta">2021 — 2024</p>
+            <p class="exp-card-desc">负责宠物、母婴类目产品设计研发。宠物饮水机、宠物粮食盆等多个项目落地。</p>
+          </div>
+        </div>
+        <div class="exp-card-bottom">
+          <div class="exp-card-metrics">
+            <div class="exp-metric-item">
+              <span class="exp-metric-num">3</span>
+              <span class="exp-metric-label">年设计经验</span>
+            </div>
+            <div class="exp-metric-item">
+              <span class="exp-metric-num">10+</span>
+              <span class="exp-metric-label">落地产品</span>
+            </div>
+          </div>
+          <div class="exp-card-tags">
+            <span class="exp-tag">
+              <svg class="exp-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v3M12 20v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12"/>
+              </svg>
+              宠物用品
+            </span>
+            <span class="exp-tag">
+              <svg class="exp-tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="8" r="4"/>
+                <path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
+              </svg>
+              母婴类目
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <svg class="footer-logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+      </svg>
+      © 2026 朱哲宇
+    </div>
+    <div class="footer-links">
+      <a href="mailto:">联系方式</a>
+      <a href="#">简历 PDF</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+/* 点击卡片（非按钮区域）跳转到详情页 */
+document.querySelectorAll('.award-card[data-href]').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('a')) return;
+    window.location.href = card.dataset.href;
+  });
+});
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+function scrollAwards(direction) {
+  const grid = document.getElementById('awardsGrid');
+  const card = grid.querySelector('.award-card');
+  const cardWidth = card ? card.offsetWidth + 16 : 376;
+  grid.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+}
+
+/* 根据滚动位置动态 enable/disable 箭头 */
+(function() {
+  const grid = document.getElementById('awardsGrid');
+  const prev = document.getElementById('awardsPrev');
+  const next = document.getElementById('awardsNext');
+  if (!grid || !prev || !next) return;
+
+  function updateArrows() {
+    const atStart = grid.scrollLeft <= 4;
+    const atEnd   = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 4;
+    prev.disabled = atStart;
+    next.disabled = atEnd;
+  }
+
+  grid.addEventListener('scroll', updateArrows, { passive: true });
+  updateArrows();
+})();
+
+/* ── Scroll reveal (IntersectionObserver) ── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-fade, .reveal-scale, .reveal-stagger').forEach(el => {
+  revealObserver.observe(el);
+});
+
+const hamburger = document.getElementById('navHamburger');
+const drawer = document.getElementById('navDrawer');
+hamburger.addEventListener('click', () => {
+  const isOpen = drawer.classList.toggle('open');
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+document.querySelectorAll('.nav-drawer-link').forEach(link => {
+  link.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  });
+});
+document.addEventListener('click', (e) => {
+  if (!nav.contains(e.target) && !drawer.contains(e.target)) {
+    drawer.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+});
+</script>
+
+</body>
+</html>
